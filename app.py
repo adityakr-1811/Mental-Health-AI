@@ -4,10 +4,7 @@ from flask import Flask, request, jsonify, render_template
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import google.generativeai as genai
-from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
 
 # Initialize Flask App
 app = Flask(__name__)
@@ -18,6 +15,8 @@ sia = SentimentIntensityAnalyzer()
 
 # Configure Gemini API if available
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+print("DEBUG: Gemini API Key Loaded:", bool(GEMINI_API_KEY))
+
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel('gemini-flash-lite-latest')
@@ -109,7 +108,7 @@ def chat():
     if not user_message:
         return jsonify({'response': "Please say something.", 'sentiment': 0, 'crisis': False})
         
-    # 1. Check for Crisis (Highest Priority)
+    # 1. Check for Crisis (Highest Priority).......
     if detect_crisis(user_message):
         return jsonify({
             'response': CRISIS_RESPONSE,
@@ -156,7 +155,5 @@ def chat():
     })
 
 if __name__ == '__main__':
-    # Ensure templates and static directories exist for the user
-    os.makedirs('templates', exist_ok=True)
-    os.makedirs('static', exist_ok=True)
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
