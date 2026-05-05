@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Maps & Ambulance - Campus Care AI{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <header class="page-header">
+        <h1>Campus Maps & Emergency Services</h1>
+        <p class="subtitle">Locate the nearest medical facilities and emergency transport.</p>
+    </header>
+
+    <div class="content-card emergency-card">
+        <h2>🚑 Request an Ambulance</h2>
+        <p>If there is an immediate medical emergency or severe injury, do not wait.</p>
+        <div class="ambulance-btn-container">
+            <a href="tel:112" class="ambulance-btn">Call 112 (National Emergency)</a>
+            <a href="tel:5550911" class="ambulance-btn secondary">Call Campus EMS (555-0911)</a>
+        </div>
+    </div>
+
+    <div class="content-card map-container">
+        <h2>🗺️ Nearest Facilities Map</h2>
+        <p>Below is a map of the campus and surrounding medical facilities.</p>
+        
+        <!-- Placeholder for embedded map -->
+        <div class="map-placeholder">
+            <div class="map-inner">
+                <svg viewBox="0 0 24 24" width="48" height="48" stroke="var(--primary-color)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <h3>Interactive Map Available on Campus Wi-Fi</h3>
+                <p>Location Services are currently disabled for your privacy.</p>
+                <ul style="text-align: left; margin-top: 15px; font-size: 0.9rem;">
+                    <li>🏥 <strong>Main Hospital:</strong> 2 miles North</li>
+                    <li>🏛️ <strong>Student Health Center:</strong> Building A, Room 101</li>
+                    <li>💊 <strong>24/7 Pharmacy:</strong> Next to the Library</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

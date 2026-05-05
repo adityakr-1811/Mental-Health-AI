@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Wellness - Campus Care AI{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <header class="page-header">
+        <h1>Wellness & Self-Care</h1>
+        <p class="subtitle">Take a moment for yourself. Breathe, relax, and reset.</p>
+    </header>
+
+    <div class="content-card breathing-card">
+        <h2>Box Breathing Exercise</h2>
+        <p>Follow the expanding and contracting circle to slow your heart rate and reduce stress.</p>
+        
+        <div class="breathing-container">
+            <div class="circle-container">
+                <div class="circle" id="breath-circle"></div>
+                <div class="text-indicator" id="breath-text">Click Start</div>
+            </div>
+        </div>
+        
+        <button id="start-breathing" class="primary-btn">Start Exercise</button>
+    </div>
+
+    <div class="content-card">
+        <h2>Quick Grounding Technique (5-4-3-2-1)</h2>
+        <p>If you're feeling overwhelmed or having a panic attack, look around you and identify:</p>
+        <ul class="grounding-list">
+            <li><strong>5</strong> things you can see</li>
+            <li><strong>4</strong> things you can physically feel</li>
+            <li><strong>3</strong> things you can hear</li>
+            <li><strong>2</strong> things you can smell</li>
+            <li><strong>1</strong> thing you can taste</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.getElementById('start-breathing').addEventListener('click', function() {
+        const circle = document.getElementById('breath-circle');
+        const text = document.getElementById('breath-text');
+        
+        this.style.display = 'none';
+        
+        const phases = [
+            { text: 'Inhale...', class: 'inhale', time: 4000 },
+            { text: 'Hold...', class: 'hold-in', time: 4000 },
+            { text: 'Exhale...', class: 'exhale', time: 4000 },
+            { text: 'Hold...', class: 'hold-out', time: 4000 }
+        ];
+        
+        let currentPhase = 0;
+        
+        function breathCycle() {
+            const phase = phases[currentPhase];
+            text.innerText = phase.text;
+            
+            // Remove all classes
+            circle.classList.remove('inhale', 'hold-in', 'exhale', 'hold-out');
+            
+            // Force reflow
+            void circle.offsetWidth;
+            
+            // Add new class
+            circle.classList.add(phase.class);
+            
+            currentPhase = (currentPhase + 1) % phases.length;
+            setTimeout(breathCycle, phase.time);
+        }
+        
+        breathCycle();
+    });
+</script>
+{% endblock %}

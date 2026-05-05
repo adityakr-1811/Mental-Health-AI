@@ -1,0 +1,528 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap');
+
+:root {
+    --bg-color: #0b0f19;
+    --surface-color: rgba(22, 30, 45, 0.65);
+    --surface-border: rgba(255, 255, 255, 0.08);
+    --primary-color: #8b5cf6;
+    --primary-hover: #a78bfa;
+    --primary-light: rgba(139, 92, 246, 0.15);
+    --secondary-color: #38bdf8;
+    --text-color: #f8fafc;
+    --text-light: #94a3b8;
+    --white: #ffffff;
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --crisis-color: rgba(239, 68, 68, 0.1);
+    --crisis-border: #ef4444;
+    --crisis-text: #fca5a5;
+    --glass-blur: blur(12px);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.12), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(56, 189, 248, 0.12), transparent 25%);
+    background-attachment: fixed;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Navbar Styles */
+.navbar {
+    width: 100%;
+    background: var(--surface-color);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--surface-border);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-brand {
+    font-size: 1.3rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: var(--text-color);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Main Content Area */
+.main-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+/* Glassmorphism Cards */
+.content-card, .chat-container {
+    background: var(--surface-color);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--surface-border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-card {
+    padding: 30px;
+    margin-bottom: 25px;
+}
+
+.content-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+}
+
+.content-card h2 {
+    color: var(--primary-hover);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+/* Chat Specifics */
+.chat-container {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 65vh;
+}
+
+.chat-box {
+    flex-grow: 1;
+    padding: 25px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1); 
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1); 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.2); 
+}
+
+.message {
+    max-width: 85%;
+    padding: 14px 18px;
+    border-radius: 18px;
+    line-height: 1.6;
+    animation: fadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 0.95rem;
+}
+
+.user-message {
+    align-self: flex-end;
+    background: linear-gradient(135deg, var(--primary-color), #6d28d9);
+    color: var(--white);
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.ai-message {
+    align-self: flex-start;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--surface-border);
+    color: var(--text-color);
+    border-bottom-left-radius: 4px;
+}
+
+.crisis-message {
+    background-color: var(--crisis-color);
+    color: var(--crisis-text);
+    border: 1px solid var(--crisis-border);
+}
+
+.ai-message p { margin-bottom: 10px; }
+.ai-message p:last-child { margin-bottom: 0; }
+.ai-message a { color: var(--secondary-color); text-decoration: none; font-weight: 500; }
+.ai-message a:hover { text-decoration: underline; }
+
+.input-area {
+    display: flex;
+    padding: 15px 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid var(--surface-border);
+}
+
+input[type="text"] {
+    flex-grow: 1;
+    padding: 14px 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+    border: 1px solid var(--surface-border);
+    border-radius: 24px;
+    outline: none;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]::placeholder {
+    color: var(--text-light);
+}
+
+input[type="text"]:focus {
+    border-color: var(--primary-color);
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+button#send-btn {
+    background: linear-gradient(135deg, var(--primary-color), #6d28d9);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-left: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+button#send-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+button#send-btn:active {
+    transform: scale(0.95);
+}
+
+.status {
+    padding: 0 20px 10px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+/* Headers & Typography */
+header {
+    text-align: center;
+}
+
+h1 {
+    font-weight: 600;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--text-color), var(--text-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.chat-layout header h1 {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    color: var(--text-light);
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+}
+
+.disclaimer {
+    background-color: rgba(234, 179, 8, 0.1);
+    border-left: 4px solid #eab308;
+    padding: 12px 18px;
+    font-size: 0.85rem;
+    color: #fde047;
+    border-radius: 6px;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+/* Pages Layouts */
+.page-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 0 20px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background: var(--surface-border);
+    margin: 30px 0;
+}
+
+/* Helplines & Maps */
+.emergency-card {
+    border-left: 4px solid var(--crisis-border);
+}
+
+.helpline-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.helpline-list li {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid var(--surface-border);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.helpline-list li:hover {
+    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.helpline-list li strong {
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.helpline-list li span {
+    color: var(--secondary-color);
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-top: 8px;
+}
+
+.ambulance-btn-container {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.ambulance-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background-color: var(--crisis-border);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.2s;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+.ambulance-btn:hover {
+    background-color: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+.ambulance-btn.secondary {
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.ambulance-btn.secondary:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+.map-placeholder {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Wellness Breathing Exercise */
+.breathing-card {
+    text-align: center;
+}
+
+.breathing-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 280px;
+    margin: 40px 0;
+}
+
+.circle-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent);
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+    transition: all 4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.text-indicator {
+    position: absolute;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--white);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    z-index: 10;
+    letter-spacing: 1px;
+}
+
+.circle.inhale {
+    transform: scale(2.2);
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.2), transparent);
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.5);
+}
+
+.circle.hold-in {
+    transform: scale(2.2);
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.2), transparent);
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.5);
+}
+
+.circle.exhale {
+    transform: scale(1);
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.circle.hold-out {
+    transform: scale(1);
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, var(--primary-color), #6d28d9);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+    transition: all 0.2s;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+.grounding-list {
+    margin-left: 20px;
+    margin-top: 15px;
+    line-height: 2;
+    color: var(--text-light);
+}
+
+.grounding-list strong {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+    .nav-links { display: none; }
+    .navbar { padding: 15px 20px; }
+}
