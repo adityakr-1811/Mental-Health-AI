@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Campus Care AI 🌿 - Mental Health Support Portal
 
 A comprehensive, multi-page web application demonstrating an AI-powered, non-clinical mental health support assistant designed for campus environments. Recently upgraded to feature a premium dark-themed, glassmorphism UI.
@@ -60,3 +61,6 @@ A comprehensive, multi-page web application demonstrating an AI-powered, non-cli
 - **Disclaimer:** Prominently displayed on multiple pages to inform users the AI is not a medical professional.
 - **Data Protection:** Chat sessions exist only in your browser session memory. Refreshing or closing the tab permanently deletes the conversation.
 - **Emergency Priority:** The app is designed to route users to professional human help (counselors, EMS) as quickly as possible during a crisis.
+=======
+# Mental-Health-AI
+>>>>>>> 0c37b7374b37aec67d2349ada8b16d29e367b9a1
