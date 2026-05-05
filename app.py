@@ -4,6 +4,11 @@ from flask import Flask, request, jsonify, render_template
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import google.generativeai as genai
+from dotenv import load_dotenv
+
+# Explicitly load the .env file in the same directory as app.py
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path, override=True)
 
 
 # Initialize Flask App
@@ -15,19 +20,17 @@ sia = SentimentIntensityAnalyzer()
 
 # Configure Gemini API if available
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-print("ALL ENV:", dict(os.environ))
-print("GEMINI_API_KEY:", os.environ.get("GEMINI_API_KEY"))
 
 if GEMINI_API_KEY:
     try:
         genai.configure(api_key=GEMINI_API_KEY)
-        model = genai.GenerativeModel('gemini-1.5-flash')
-        print("✅ Gemini model loaded successfully")
+        model = genai.GenerativeModel('gemini-flash-lite-latest')
+        print("[SUCCESS] Gemini model loaded successfully")
     except Exception as e:
-        print("❌ Gemini init error:", e)
+        print("[ERROR] Gemini init error:", e)
         model = None
 else:
-    print("❌ API KEY NOT FOUND")
+    print("[ERROR] API KEY NOT FOUND")
     model = None
 
 # ---- CRITICAL ETHICAL SAFEGUARDS ----
