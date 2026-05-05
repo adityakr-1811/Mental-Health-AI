@@ -19,9 +19,15 @@ print("ALL ENV:", dict(os.environ))
 print("GEMINI_API_KEY:", os.environ.get("GEMINI_API_KEY"))
 
 if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel('gemini-flash-lite-latest')
+    try:
+        genai.configure(api_key=GEMINI_API_KEY)
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        print("✅ Gemini model loaded successfully")
+    except Exception as e:
+        print("❌ Gemini init error:", e)
+        model = None
 else:
+    print("❌ API KEY NOT FOUND")
     model = None
 
 # ---- CRITICAL ETHICAL SAFEGUARDS ----
