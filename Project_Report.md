@@ -1,7 +1,7 @@
 # Final Project Report: AI Mental Health Support Assistant
 
-**Academic Year:** 2023-2024  
-**Project Level:** B.Tech 1st Year  
+**Academic Year:** 2024-2028  
+**Project Level:** B.Tech 2nd Year  
 
 ---
 

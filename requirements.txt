@@ -2,3 +2,4 @@ flask
 nltk
 google-generativeai
 python-dotenv
+gunicorn
